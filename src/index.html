@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <meta name="description" content="A sleek, browser-based metronome with configurable tempo, time signatures, and saveable profiles." />
+  <title>Metronome</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div id="app">
+    <!-- Header -->
+    <header id="header">
+      <h1 id="app-title">Metronome</h1>
+      <button id="btn-profiles" type="button" aria-label="Manage profiles">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
+          <polyline points="17 21 17 13 7 13 7 21"/>
+          <polyline points="7 3 7 8 15 8"/>
+        </svg>
+      </button>
+    </header>
+
+    <!-- Main content -->
+    <main id="main">
+      <!-- Circular arc indicator -->
+      <div id="arc-container">
+        <svg id="arc-svg" viewBox="0 0 240 240">
+          <!-- Background ring -->
+          <circle
+            id="arc-bg"
+            cx="120" cy="120" r="105"
+            fill="none"
+            stroke-width="10"
+          />
+          <!-- Progress arc -->
+          <circle
+            id="arc-progress"
+            cx="120" cy="120" r="105"
+            fill="none"
+            stroke-width="10"
+            stroke-linecap="round"
+            transform="rotate(-90 120 120)"
+          />
+          <!-- Beat flash ring -->
+          <circle
+            id="arc-flash"
+            cx="120" cy="120" r="105"
+            fill="none"
+            stroke-width="14"
+            stroke-linecap="round"
+            opacity="0"
+          />
+        </svg>
+        <!-- Center info -->
+        <div id="arc-center">
+          <span id="bpm-display" role="button" tabindex="0" title="Click to type BPM">60</span>
+          <input id="bpm-input" type="number" min="1" max="900" value="60" aria-label="Type BPM" />
+          <span id="tempo-label">Larghetto</span>
+        </div>
+      </div>
+
+      <!-- Beat pads -->
+      <div id="beat-pads-section">
+        <div id="beat-pads" role="group" aria-label="Beat configuration"></div>
+        <div id="beats-per-bar-control">
+          <button id="btn-beats-minus" type="button" aria-label="Decrease beats per bar">−</button>
+          <span id="beats-per-bar-label" role="button" tabindex="0" title="Click to type beats">4 beats</span>
+          <input id="beats-input" type="number" min="1" max="16" value="4" aria-label="Type beats per bar" />
+          <button id="btn-beats-plus" type="button" aria-label="Increase beats per bar">+</button>
+        </div>
+      </div>
+
+      <!-- Tempo controls -->
+      <div id="tempo-controls">
+        <button id="btn-bpm-minus" type="button" aria-label="Decrease tempo">−</button>
+        <input
+          id="tempo-slider"
+          type="range"
+          min="1"
+          max="900"
+          value="60"
+          aria-label="Tempo slider"
+        />
+        <button id="btn-bpm-plus" type="button" aria-label="Increase tempo">+</button>
+      </div>
+
+      <!-- Start/Stop -->
+      <button id="btn-start-stop" type="button">
+        <svg id="icon-play" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+          <polygon points="6,3 20,12 6,21" />
+        </svg>
+        <svg id="icon-stop" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" style="display:none">
+          <rect x="4" y="4" width="16" height="16" rx="2" />
+        </svg>
+        <span id="start-stop-label">START</span>
+      </button>
+    </main>
+
+    <!-- Profile Modal -->
+    <div id="modal-overlay" class="modal-overlay" hidden>
+      <div id="modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="modal-header">
+          <h2 id="modal-title">Profiles</h2>
+          <button id="btn-modal-close" type="button" aria-label="Close modal">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+              <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+          </button>
+        </div>
+        <div class="modal-actions-top">
+          <button id="btn-save-current" type="button" class="btn-primary">
+            Save Current Settings
+          </button>
+        </div>
+        <div id="profile-list" class="profile-list"></div>
+        <div id="profile-empty" class="profile-empty" hidden>
+          <p>No saved profiles yet.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="./index.js"></script>
+</body>
+</html>

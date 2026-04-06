@@ -1,0 +1,14 @@
+{
+  "name": "metronome",
+  "version": "1.0.0",
+  "description": "A web-based metronome inspired by Metronome Beats",
+  "source": "src/index.html",
+  "scripts": {
+    "dev": "parcel serve src/index.html --open",
+    "build": "rm -rf dist && parcel build src/index.html",
+    "generate-audio": "bun scripts/generate-clicks.js"
+  },
+  "devDependencies": {
+    "parcel": "^2.13.0"
+  }
+}
