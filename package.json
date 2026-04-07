@@ -5,7 +5,7 @@
   "source": "src/index.html",
   "scripts": {
     "dev": "parcel serve src/index.html --open",
-    "build": "rm -rf dist && parcel build src/index.html",
+    "build": "rm -rf dist && parcel build src/index.html --public-url ./",
     "generate-audio": "bun scripts/generate-clicks.js",
     "predeploy": "bun run build",
     "deploy": "gh-pages -d dist"
