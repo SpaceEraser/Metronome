@@ -291,7 +291,7 @@ body {
   gap: var(--space-sm);
   flex-wrap: wrap;
   max-width: 100%;
-  padding: 0 var(--space-sm);
+  padding: 0 var(--space-sm) 20px;
 }
 
 .beat-pad {
